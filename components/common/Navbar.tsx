@@ -3,10 +3,10 @@
 import { usePathname } from 'next/navigation';
 import { Disclosure } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import { useAppSelector, useAppDispatch } from '@/redux/hooks';
-import { useLogoutMutation } from '@/redux/features/authApiSlice';
-import { logout as setLogout } from '@/redux/features/authSlice';
-import { NavLink, NavButton } from '@/components/common';
+import { useAppSelector, useAppDispatch } from '../../redux/hooks';
+import { useLogoutMutation } from '../../redux/features/authApiSlice';
+import { logout as setLogout } from '../../redux/features/authSlice';
+import { NavLink, NavButton } from '../common';
 
 export default function Navbar() {
 	const pathname = usePathname();
