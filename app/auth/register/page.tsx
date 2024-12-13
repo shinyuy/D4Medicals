@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import { RegisterForm } from '@/components/forms';
-import { SocialButtons } from '@/components/common';
+import { RegisterForm } from '../../../components/forms';
+import { SocialButtons } from '../../../components/common';
 import type { Metadata } from 'next';
-import { Navbar } from '@/components/common';
+import { Navbar } from '../../../components/common';
 
 export const metadata: Metadata = {
 	title: 'D4 Medical Forms | Register',
