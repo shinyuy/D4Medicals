@@ -1,8 +1,7 @@
 
-import Link from 'next/link';
 import type { Metadata } from 'next';
-import { Navbar, NavButton } from '@/components/common';
-import Image from 'next/image';
+import { Navbar, /*NavButton*/ } from '@/components/common';
+
 import BookingForm from '@/components/forms/BookingForm';
 export const metadata: Metadata = {
     title: 'Full Auth | Home',

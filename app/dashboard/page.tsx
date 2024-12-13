@@ -1,7 +1,7 @@
 'use client';
 
 import { useRetrieveUserQuery } from '@/redux/features/authApiSlice';
-import { List, Spinner } from '@/components/common';
+import { Spinner } from '@/components/common';
 import Link from 'next/link';
 
 export default function Page() {

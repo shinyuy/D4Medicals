@@ -24,10 +24,9 @@ export default function Page() {
         openFrom: "",
         closesAt: ""
     })
-    const { data: centersData, isFetching } = useRetrieveCentersQuery('');
+    const { data: centersData, /*isFetching*/ } = useRetrieveCentersQuery('');
     const [create, setCreate] = useState(false)
 
-    console.log(centersData?.centers)
 
     async function createTestCenter() {
         const response = await createCenterSession(center)
@@ -100,28 +99,30 @@ export default function Page() {
                         </div>
                     </>
                     :
-
-                    centersData?.centers?.map((center, i) => {
-                        return (
-                            <>
-                                <div className="w-1/2 center-card border rounded-lg shadow-md p-4">
-                                    <h2 className="text-xl font-semibold">{center.center_name}</h2>
-                                    <p className="text-gray-600">Location: {center.location}</p>
-                                    <p className="text-gray-600">Earliest Date: {center.earliest_date}</p>
-                                    <p className="text-gray-600">Parking: {center.parking ? 'Available' : 'Not Available'}</p>
-                                    <p className="text-gray-600">Address: {center.full_address}</p>
-                                    <p className="text-gray-600">Open From: {center.open_from}</p>
-                                    <p className="text-gray-600">Closes At: {center.closes_at}</p>
-                                    <button
-                                        onClick={() => router.push(`/dashboard/calendar?centerId=${center.id}&location=${center.location}`)}
-                                        className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-                                    >
-                                        Add Availability
-                                    </button>
-                                </div>
-                            </>
-                        )
-                    })
+                    <div>
+                        <button onClick={() => setCreate(!create)}>Create</button>
+                        {centersData?.centers?.map((center, i) => {
+                            return (
+                                <>
+                                    <div className="w-1/2 center-card border rounded-lg shadow-md p-4">
+                                        <h2 className="text-xl font-semibold">{center.center_name}</h2>
+                                        <p className="text-gray-600">Location: {center.location}</p>
+                                        <p className="text-gray-600">Earliest Date: {center.earliest_date}</p>
+                                        <p className="text-gray-600">Parking: {center.parking ? 'Available' : 'Not Available'}</p>
+                                        <p className="text-gray-600">Address: {center.full_address}</p>
+                                        <p className="text-gray-600">Open From: {center.open_from}</p>
+                                        <p className="text-gray-600">Closes At: {center.closes_at}</p>
+                                        <button
+                                            onClick={() => router.push(`/dashboard/calendar?centerId=${center.id}&location=${center.location}`)}
+                                            className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                                        >
+                                            Add Availability
+                                        </button>
+                                    </div>
+                                </>
+                            )
+                        })}
+                    </div>
 
                 }
 

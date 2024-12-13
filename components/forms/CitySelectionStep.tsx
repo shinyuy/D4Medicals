@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Clock from "../utils/Clock"
 import Calendar from "../utils/Calendar"
-import Parking from "../utils/Parking"
 import { useRetrieveCentersByLocationQuery } from '@/redux/features/centerApiSlice';
 
 
@@ -17,7 +16,7 @@ const cities = [
 const CitySelectionStep = ({ onNextStep, setFormData, formData }) => {
     const [selectedCity, setSelectedCity] = useState("");
     const [availableDoctors, setAvailableDoctors] = useState([]);
-    const { data: centersData, isFetching } = useRetrieveCentersByLocationQuery(selectedCity);
+    const { data: centersData, /*isFetching*/ } = useRetrieveCentersByLocationQuery(selectedCity);
 
 
     useEffect(() => {

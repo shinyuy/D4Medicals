@@ -27,7 +27,7 @@ export default function Page() {
 
 				<div className='mt-10 sm:mx-auto sm:w-full sm:max-w-sm'>
 					<RegisterForm />
-					{/* <SocialButtons /> */}
+					<SocialButtons />
 
 					<p className='mt-10 text-center text-sm text-gray-500'>
 						Already have an account?{' '}

@@ -1,9 +1,6 @@
 // components/BookingForm.js
 "use client"
 import { useState } from "react";
-import FullCalendar from '@fullcalendar/react'
-import dayGridPlugin from '@fullcalendar/daygrid'
-import timeGridPlugin from "@fullcalendar/timegrid";
 import CitySelectionStep from "./CitySelectionStep"
 import Calendar from "./Calendar"
 
@@ -35,9 +32,9 @@ const timeSlots = [
     "10:00 AM", "10:15 AM", "10:30 AM", "10:45 AM",
 ];
 
-const events = [
-    { title: 'Meeting', start: new Date() }
-]
+// const events = [
+//     { title: 'Meeting', start: new Date() }
+// ]
 
 export default function BookingForm() {
     const [step, setStep] = useState(1);
@@ -51,15 +48,15 @@ export default function BookingForm() {
     const handleNext = () => setStep(step + 1);
     const handleBack = () => setStep(step - 1);
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
+    // const handleChange = (e) => {
+    //     const { name, value } = e.target;
+    //     setFormData({ ...formData, [name]: value });
+    // };
 
-    const handleDateSelect = (selectInfo) => {
-        const selectedDate = selectInfo.startStr;
-        setFormData({ ...formData, date: selectedDate });
-    };
+    // const handleDateSelect = (selectInfo) => {
+    //     const selectedDate = selectInfo.startStr;
+    //     setFormData({ ...formData, date: selectedDate });
+    // };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -117,22 +114,6 @@ export default function BookingForm() {
 
 
                 {step === 3 && (
-                    // <div>
-                    //     <h2 className="text-xl font-semibold mb-4">
-                    //         Step 3: Choose Date and Time
-                    //     </h2>
-                    //     <FullCalendar
-                    //         plugins={[dayGridPlugin, timeGridPlugin]}
-                    //         initialView="timeGridWeek"
-                    //         selectable
-                    //         select={handleDateSelect}
-                    //         events={[
-                    //             { title: "Unavailable", start: "2024-11-29T09:00:00", allDay: false },
-                    //             { title: "Unavailable", start: "2024-11-30T10:00:00", allDay: false },
-                    //         ]}
-                    //         height="auto"
-                    //     />
-                    // </div>
                     <Calendar location={formData.city} />
                 )}
 
