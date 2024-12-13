@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { useCreateCenterSessionMutation, useRetrieveCentersQuery } from '@/redux/features/centerApiSlice';
+import { useCreateCenterSessionMutation, useRetrieveCentersQuery } from '../../../redux/features/centerApiSlice';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 
