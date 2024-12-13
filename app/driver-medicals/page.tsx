@@ -1,0 +1,27 @@
+
+import Link from 'next/link';
+import type { Metadata } from 'next';
+import { Navbar, NavButton } from '@/components/common';
+import Image from 'next/image';
+import BookingForm from '@/components/forms/BookingForm';
+export const metadata: Metadata = {
+    title: 'Full Auth | Home',
+    description: 'Full Auth home page',
+};
+
+export default function Page() {
+    return (
+        <main className='bg-white'>
+            <Navbar />
+            <div className='flex flex-col items-center py-12'>
+                <h2 className='text-green-900 text-5xl font-bold'>D4 Medical Forms</h2>
+                <p className='text-2xl'>Book your Driver Medical Same Day for £54.99</p>
+                <p className='text-2xl'>(includes free eye test and free re-test)</p>
+                <p>Same Day Appointments for Liverpool clinic below:</p>
+            </div>
+
+            <BookingForm />
+
+        </main>
+    );
+}

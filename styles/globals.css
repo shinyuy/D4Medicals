@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.rdp-root {
+    /* Add more CSS variables here. */
+    --rdp-today-color: green;
+    --rdp-accent-background-color: green;
+    --rdp-accent-color: green;
+  }
+  
+  .rdp-today {
+    color: green;
+  }
