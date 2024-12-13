@@ -1,10 +1,10 @@
-import '@/styles/globals.css';
+import '../styles/globals.css';
 import "react-day-picker/style.css";
 import { Inter } from 'next/font/google';
 import type { Metadata } from 'next';
-import Provider from '@/redux/provider';
-import { Footer } from '@/components/common';
-import { Setup } from '@/components/utils';
+import Provider from '../redux/provider';
+import { Footer } from '../components/common';
+import { Setup } from '../components/utils';
 
 const inter = Inter({ subsets: ['latin'] });
 

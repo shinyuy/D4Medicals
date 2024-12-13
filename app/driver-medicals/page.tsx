@@ -1,8 +1,8 @@
 
 import type { Metadata } from 'next';
-import { Navbar, /*NavButton*/ } from '@/components/common';
+import { Navbar, /*NavButton*/ } from '../../components/common';
 
-import BookingForm from '@/components/forms/BookingForm';
+import BookingForm from '../../components/forms/BookingForm';
 export const metadata: Metadata = {
     title: 'D4 Medical Forms | Drivers Medicals ',
     description: 'D4 Medical Forms Drivers Medicals page',

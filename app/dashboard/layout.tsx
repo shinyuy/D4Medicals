@@ -1,4 +1,4 @@
-import { RequireAuth } from '@/components/utils';
+import { RequireAuth } from '../../components/utils';
 
 interface Props {
 	children: React.ReactNode;
