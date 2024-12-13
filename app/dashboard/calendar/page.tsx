@@ -6,8 +6,8 @@ import { useSearchParams } from 'next/navigation';
 
 export default function Page() {
     const params = useSearchParams()
-    const [start, setStart] = useState(new Date());
-    const [end, setEnd] = useState(new Date());
+    const [start, setStart] = useState<string>('');
+    const [end, setEnd] = useState<string>('');
     const [eventName, setEventName] = useState("");
     const [eventDescription, setEventDescription] = useState("");
     const [createEventSession, { /*isLoading*/ }] = useCreateEventSessionMutation();
@@ -38,8 +38,8 @@ export default function Page() {
         if ('data' in response && response.data?.event) {
             setEventName("")
             setEventDescription("")
-            setStart(new Date())
-            setEnd(new Date())
+            setStart("")
+            setEnd("")
             toast.success("Event created")
         } else {
             toast.error("Event creation error")
@@ -65,7 +65,7 @@ export default function Page() {
                     <p>Event name</p>
                     <input required className='w-1/2 rounded' value={eventName} type="text" onChange={(e) => setEventName(e.target.value)} />
                     <p>Event description</p>
-                    <textarea required className='w-1/2 rounded' value={eventDescription} type="text" onChange={(e) => setEventDescription(e.target.value)} />
+                    <textarea className='w-1/2 rounded' value={eventDescription} onChange={(e) => setEventDescription(e.target.value)} required></textarea>
                     <hr />
                     <button className='bg-green-900 py-4 px-6 mt-12 text-white rounded' onClick={() => createCalendarEvent()}>Create Calendar Event</button>
                     <p></p>
