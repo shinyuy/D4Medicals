@@ -1,4 +1,4 @@
-import { PasswordResetForm } from '@/components/forms';
+import { PasswordResetForm } from '../../components/forms';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {

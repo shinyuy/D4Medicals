@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { Navbar } from '@/components/common';
+import { Navbar } from '../components/common';
 import Image from 'next/image';
-import ContactForm from '@/components/forms/ContactForm';
+import ContactForm from '../components/forms/ContactForm';
 
 
 export const metadata: Metadata = {
