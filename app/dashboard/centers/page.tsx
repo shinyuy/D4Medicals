@@ -30,11 +30,11 @@ export default function Page() {
 
     async function createTestCenter() {
         const response = await createCenterSession(center)
-        console.log(response)
-        if (response?.error?.data.message) {
-            toast.error("Center creation error")
-        }
-        if (response?.data?.center) {
+
+        // if ('error' in response && response.error.data?.message) {
+        //     toast.error("Center creation error")
+        // }
+        if ('data' in response && response.data?.center) {
             setCenter({
                 centerName: "",
                 location: "",
@@ -44,6 +44,8 @@ export default function Page() {
                 closesAt: ""
             })
             toast.success("Center created")
+        } else {
+            toast.error("Center creation error")
         }
     }
 

@@ -32,15 +32,17 @@ export default function Page() {
         }
         const response = await createEventSession(event)
         console.log(response)
-        if (response?.error?.data.message) {
-            toast.error("Event creation error")
-        }
-        if (response?.data?.event) {
+        // if ('error' in response && response.error?.data?.message) {
+
+        // }
+        if ('data' in response && response.data?.event) {
             setEventName("")
             setEventDescription("")
             setStart(new Date())
             setEnd(new Date())
             toast.success("Event created")
+        } else {
+            toast.error("Event creation error")
         }
     }
 
