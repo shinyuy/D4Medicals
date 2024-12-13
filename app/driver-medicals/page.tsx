@@ -4,8 +4,8 @@ import { Navbar, /*NavButton*/ } from '@/components/common';
 
 import BookingForm from '@/components/forms/BookingForm';
 export const metadata: Metadata = {
-    title: 'Full Auth | Home',
-    description: 'Full Auth home page',
+    title: 'D4 Medical Forms | Drivers Medicals ',
+    description: 'D4 Medical Forms Drivers Medicals page',
 };
 
 export default function Page() {
