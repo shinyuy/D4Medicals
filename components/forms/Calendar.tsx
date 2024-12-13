@@ -33,7 +33,7 @@ export default function Calendar({ location }) {
 
                     const response = await createEventsSession({ timeMin, timeMax, location }); // go fetch data on server
 
-                    if ('data' in response && response.data?.event) {
+                    if ('data' in response && response.data?.events) {
                         const events = response?.data?.events || [];
                         setAvailableSlots(events);
                     }
