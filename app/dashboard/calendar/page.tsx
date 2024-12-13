@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { useCreateEventSessionMutation } from "@/redux/features/eventsApiSlice";
+import { useCreateEventSessionMutation } from "../../../redux/features/eventsApiSlice";
 import { toast } from 'react-toastify';
 import { useSearchParams } from 'next/navigation';
 
