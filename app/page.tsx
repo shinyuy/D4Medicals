@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { Navbar, NavButton } from '@/components/common';
+import { Navbar } from '@/components/common';
 import Image from 'next/image';
 import ContactForm from '@/components/forms/ContactForm';
 
