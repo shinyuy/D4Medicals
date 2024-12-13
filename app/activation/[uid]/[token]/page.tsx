@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useActivationMutation } from '../../../../redux/features/authApiSlice';
 import { toast } from 'react-toastify';
+import { FC } from 'react';
 
 interface Props {
 	params: {
@@ -12,7 +13,7 @@ interface Props {
 	};
 }
 
-export default function Page({ params }: Props) {
+const Page: FC<Props> = ({ params }) => {
 	const router = useRouter();
 	const [activation] = useActivationMutation();
 
@@ -42,3 +43,4 @@ export default function Page({ params }: Props) {
 		</div>
 	);
 }
+export default Page;
