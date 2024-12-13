@@ -1,7 +1,7 @@
 'use client';
 
-import { useResetPasswordConfirm } from '@/hooks';
-import { Form } from '@/components/forms';
+import { useResetPasswordConfirm } from '../../hooks';
+import { Form } from '../../components/forms';
 
 interface Props {
 	uid: string;

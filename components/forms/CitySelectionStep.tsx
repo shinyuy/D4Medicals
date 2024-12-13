@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Clock from "../utils/Clock"
 import Calendar from "../utils/Calendar"
-import { useRetrieveCentersByLocationQuery } from '@/redux/features/centerApiSlice';
+import { useRetrieveCentersByLocationQuery } from '../../redux/features/centerApiSlice';
 
 
 const cities = [

@@ -1,7 +1,7 @@
 'use client';
 
-import { useLogin } from '@/hooks';
-import { Form } from '@/components/forms';
+import { useLogin } from '../../hooks';
+import { Form } from '../forms';
 
 export default function LoginForm() {
 	const { email, password, isLoading, onChange, onSubmit } = useLogin();

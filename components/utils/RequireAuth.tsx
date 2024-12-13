@@ -1,8 +1,8 @@
 'use client';
 
 import { redirect } from 'next/navigation';
-import { useAppSelector } from '@/redux/hooks';
-import { Spinner } from '@/components/common';
+import { useAppSelector } from '../../redux/hooks';
+import { Spinner } from '../../components/common';
 
 interface Props {
 	children: React.ReactNode;

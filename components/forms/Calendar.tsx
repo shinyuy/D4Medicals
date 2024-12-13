@@ -4,7 +4,7 @@ import { useState } from "react";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/style.css";
 import { parse, format, add } from 'date-fns';
-import { useCreateEventsSessionMutation } from "@/redux/features/eventsApiSlice";
+import { useCreateEventsSessionMutation } from "../../redux/features/eventsApiSlice";
 import { toast } from 'react-toastify';
 
 export default function Calendar({ location }) {
