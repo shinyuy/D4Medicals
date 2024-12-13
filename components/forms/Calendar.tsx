@@ -5,17 +5,16 @@ import { DayPicker } from "react-day-picker";
 import "react-day-picker/style.css";
 import { parse, format, add } from 'date-fns';
 import { useCreateEventsSessionMutation } from "@/redux/features/eventsApiSlice";
+import { toast } from 'react-toastify';
 
 export default function Calendar({ location }) {
     const [selected, setSelectedDate] = useState<Date>();
     const [slots, setAvailableSlots] = useState(); // list of available slots returned from server
-    const [timetableError, setTimetableError] = useState<string>(""); // because bad things can happen
-    const [isTimeTableLoading, setIsTimeTableLoading] = useState(false); // because it takes time to fetch data from server, add a spinner while we fetch
     const [createEventsSession, { /*isLoading*/ }] = useCreateEventsSessionMutation();
 
 
     const handleDayPickerSelect = async (date: Date | undefined) => {
-        setTimetableError("")
+
         if (!date) {
             setSelectedDate(undefined);
             setAvailableSlots([]);
@@ -25,7 +24,6 @@ export default function Calendar({ location }) {
                 setAvailableSlots([]);
             } else {
                 setSelectedDate(date);
-                setIsTimeTableLoading(true);
                 try {
                     const dayDate = format(date, 'yyyyMMdd')
                     const dayDateStr = parse(dayDate, 'yyyyMMdd', new Date())
@@ -39,9 +37,8 @@ export default function Calendar({ location }) {
                     setAvailableSlots(events);
                 } catch (error) {
                     console.error(error)
-                    setTimetableError("Failed to fetch available slots. Please try again.");
+                    toast.error('Failed to fetch available slots. Please try again.');
                 } finally {
-                    setIsTimeTableLoading(false);
                 }
             }
         }
