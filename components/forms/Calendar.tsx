@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 
 export default function Calendar({ location }) {
     const [selected, setSelectedDate] = useState<Date>();
-    const [slots, setAvailableSlots] = useState(); // list of available slots returned from server
+    const [slots, setAvailableSlots] = useState([]); // list of available slots returned from server
     const [createEventsSession, { /*isLoading*/ }] = useCreateEventsSessionMutation();
 
 
@@ -32,9 +32,12 @@ export default function Calendar({ location }) {
                     const timeMax = add(dayDateStr, { days: 1 }).toISOString();
 
                     const response = await createEventsSession({ timeMin, timeMax, location }); // go fetch data on server
-                    const events = response?.data?.events || [];
 
-                    setAvailableSlots(events);
+                    if ('data' in response && response.data?.event) {
+                        const events = response?.data?.events || [];
+                        setAvailableSlots(events);
+                    }
+
                 } catch (error) {
                     console.error(error)
                     toast.error('Failed to fetch available slots. Please try again.');
