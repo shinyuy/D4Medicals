@@ -2,13 +2,22 @@ import { apiSlice } from '../services/apiSlice';
 
 const eventsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
+    // createEventsSession: builder.mutation({
+    //   query: ({ timeMin, timeMax, location, centerId }) => {   
+    //     return ({
+    //     url: '/calendar/filtered-events/',
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify({ timeMin, timeMax, location, centerId }),
+    //   })},
+    // }),
     createEventsSession: builder.mutation({
-      query: ({ timeMin, timeMax, location }) => {   
+      query: ({ timeMin, timeMax, location, centerId }) => {   
         return ({
-        url: '/calendar/filtered-events/',
+        url: '/calendar/free-slots/',
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ timeMin, timeMax, location }),
+        body: JSON.stringify({ timeMin, timeMax, location, centerId }),
       })},
     }),
     createEventSession: builder.mutation({

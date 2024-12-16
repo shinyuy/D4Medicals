@@ -3,6 +3,7 @@
 import { useState } from "react";
 import CitySelectionStep from "./CitySelectionStep"
 import Calendar from "./Calendar"
+import DriverDetails from "./DriverDetails";
 
 const medicalTypes = [
     {
@@ -27,14 +28,6 @@ const medicalTypes = [
     },
 ];
 
-const timeSlots = [
-    "09:00 AM", "09:15 AM", "09:30 AM", "09:45 AM",
-    "10:00 AM", "10:15 AM", "10:30 AM", "10:45 AM",
-];
-
-// const events = [
-//     { title: 'Meeting', start: new Date() }
-// ]
 
 export default function BookingForm() {
     const [step, setStep] = useState(1);
@@ -43,20 +36,11 @@ export default function BookingForm() {
         city: "",
         date: "",
         timeSlot: "",
+        centerId: "",
     });
 
     const handleNext = () => setStep(step + 1);
     const handleBack = () => setStep(step - 1);
-
-    // const handleChange = (e) => {
-    //     const { name, value } = e.target;
-    //     setFormData({ ...formData, [name]: value });
-    // };
-
-    // const handleDateSelect = (selectInfo) => {
-    //     const selectedDate = selectInfo.startStr;
-    //     setFormData({ ...formData, date: selectedDate });
-    // };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -114,31 +98,15 @@ export default function BookingForm() {
 
 
                 {step === 3 && (
-                    <Calendar location={formData.city} />
+                    <Calendar location={formData.city} centerId={formData.centerId} formData={formData} setFormData={setFormData} />
                 )}
 
                 {step === 4 && (
                     <div>
                         <h2 className="text-xl font-semibold mb-4">
-                            Step 4: Select Time Slot
+                            Step 4: Fill your details
                         </h2>
-                        <div className="grid grid-cols-4 gap-4">
-                            {timeSlots.map((slot) => (
-                                <button
-                                    key={slot}
-                                    type="button"
-                                    onClick={() =>
-                                        setFormData({ ...formData, timeSlot: slot })
-                                    }
-                                    className={`p-2 rounded-md text-center ${formData.timeSlot === slot
-                                        ? "bg-blue-500 text-white"
-                                        : "bg-gray-200"
-                                        } hover:bg-blue-100 hover:shadow-md transition`}
-                                >
-                                    {slot}
-                                </button>
-                            ))}
-                        </div>
+                        <DriverDetails />
                     </div>
                 )}
 
@@ -180,15 +148,3 @@ export default function BookingForm() {
         </div>
     );
 }
-
-
-
-// // a custom render function
-// function renderEventContent(eventInfo) {
-//     return (
-//         <>
-//             <b>{eventInfo.timeText}</b>
-//             <i>{eventInfo.event.title}</i>
-//         </>
-//     )
-// }

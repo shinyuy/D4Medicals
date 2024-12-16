@@ -22,6 +22,7 @@ const CitySelectionStep = ({ onNextStep, setFormData, formData }) => {
     useEffect(() => {
         if (centersData?.centers) {
             setAvailableDoctors(centersData.centers);
+            console.log(centersData)
         } else {
             setAvailableDoctors([]); // Clear data if no centers available
         }
@@ -33,7 +34,7 @@ const CitySelectionStep = ({ onNextStep, setFormData, formData }) => {
 
     const handleBookNow = (doctor) => {
         console.log(`Booking with: ${doctor.name}`);
-        setFormData({ ...formData, city: selectedCity })
+        setFormData({ ...formData, city: selectedCity, centerId: doctor.id })
         onNextStep(doctor);
     };
 

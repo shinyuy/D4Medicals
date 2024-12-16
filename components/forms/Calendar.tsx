@@ -6,8 +6,9 @@ import "react-day-picker/style.css";
 import { parse, format, add } from 'date-fns';
 import { useCreateEventsSessionMutation } from "../../redux/features/eventsApiSlice";
 import { toast } from 'react-toastify';
+import PaginateTimeSlots from "./PaginateTimeSlots";
 
-export default function Calendar({ location }) {
+export default function Calendar({ location, centerId, formData, setFormData }) {
     const [selected, setSelectedDate] = useState<Date>();
     const [slots, setAvailableSlots] = useState([]); // list of available slots returned from server
     const [createEventsSession, { /*isLoading*/ }] = useCreateEventsSessionMutation();
@@ -24,6 +25,7 @@ export default function Calendar({ location }) {
                 setAvailableSlots([]);
             } else {
                 setSelectedDate(date);
+                setFormData({ ...formData, date: date })
                 try {
                     const dayDate = format(date, 'yyyyMMdd')
                     const dayDateStr = parse(dayDate, 'yyyyMMdd', new Date())
@@ -31,10 +33,11 @@ export default function Calendar({ location }) {
 
                     const timeMax = add(dayDateStr, { days: 1 }).toISOString();
 
-                    const response = await createEventsSession({ timeMin, timeMax, location }); // go fetch data on server
+                    const response = await createEventsSession({ timeMin, timeMax, location, centerId }); // go fetch data on server
 
-                    if ('data' in response && response.data?.events) {
-                        const events = response?.data?.events || [];
+                    if ('data' in response && response.data) {
+                        const events = response?.data || [];
+
                         setAvailableSlots(events);
                     }
 
@@ -94,29 +97,7 @@ export default function Calendar({ location }) {
                             Pick An Available Time
                         </button>
                         <label className="sr-only">Pick a time</label>
-                        <ul id="timetable" className="grid w-full grid-cols-2 gap-2 mt-5">
-                            {slots?.length > 0 && slots?.map((slot, i) => {
-
-                                return (
-                                    <li key={i}>
-                                        <input
-                                            type="radio"
-                                            id="1"
-                                            value="8:00"
-                                            className="hidden peer"
-                                            name="timetable"
-                                        />
-                                        <label
-                                            htmlFor="1"
-                                            className="inline-flex items-center justify-center w-[110px] p-2 text-sm font-medium text-center bg-white border rounded-lg cursor-pointer text-green-900 border-green-900 peer-checked:border-green-900 peer-checked:bg-green-900 hover:text-white peer-checked:text-white hover:bg-green-900"
-                                        >
-                                            {slot.start.slice(11, 16)} - {slot.end.slice(11, 16)}
-                                        </label>
-                                    </li>
-                                )
-                            })}
-
-                        </ul>
+                        <PaginateTimeSlots timeSlots={slots} formData={formData} setFormData={setFormData} />
                     </div>
                 </div>
             </form>

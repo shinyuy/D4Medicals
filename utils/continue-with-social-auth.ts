@@ -19,7 +19,7 @@ export default async function continueWithSocialAuth(
 				Accept: 'application/json',
 			},
 			credentials: 'include',
-		});
+		});   
 		
 		const data = await res.json();
 		console.log(data)
