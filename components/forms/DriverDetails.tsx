@@ -5,6 +5,18 @@ import { Elements } from "@stripe/react-stripe-js";
 
 const stripePromise = loadStripe("pk_test_51QWeSwDgaWgRlwMxzXay5R7FHglYjMymwM2BwlykO6izceqB6tIvQPJ2GjXhLNsJLWSjpmZ3NbDrRhffNLZGAfe600r8XnM7B1");
 
+interface FormErrors {
+    firstName?: string;
+    lastName?: string;
+    dob?: string;
+    email?: string;
+    phone?: string;
+    postCode?: string;
+    vehicleType?: string;
+    licenceType: string;
+    termsAccepted?: string;
+}
+
 const DriverDetails = () => {
     const [formData, setFormData] = useState({
         firstName: "",
@@ -18,8 +30,9 @@ const DriverDetails = () => {
         termsAccepted: false,
     });
 
-    const [errors, setErrors] = useState({});
+    const [errors, setErrors] = useState<FormErrors>({});
     const [isModalOpen, setModalOpen] = useState(false);
+    const [loading, setLoading] = useState(false)
 
     const postCodeRegex = /^[A-Z]{1,2}[0-9][0-9A-Z]?\s?[0-9][A-Z]{2}$/i;
 
@@ -32,7 +45,9 @@ const DriverDetails = () => {
     };
 
     const validateForm = () => {
-        const newErrors = {};
+        const newErrors: FormErrors = {
+            licenceType: ""
+        };
 
         if (!formData.firstName) newErrors.firstName = "First name is required.";
         if (!formData.lastName) newErrors.lastName = "Last name is required.";
@@ -58,6 +73,7 @@ const DriverDetails = () => {
         e.preventDefault();
 
         if (!validateForm()) return;
+        setLoading(true)
 
         setModalOpen(true);
 
