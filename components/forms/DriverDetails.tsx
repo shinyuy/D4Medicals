@@ -13,7 +13,7 @@ interface FormErrors {
     phone?: string;
     postCode?: string;
     vehicleType?: string;
-    licenceType: string;
+    licenceType?: string;
     termsAccepted?: string;
 }
 
