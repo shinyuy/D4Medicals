@@ -19,7 +19,6 @@ const DriverDetails = () => {
     });
 
     const [errors, setErrors] = useState({});
-    const [loading, setLoading] = useState(false);
     const [isModalOpen, setModalOpen] = useState(false);
 
     const postCodeRegex = /^[A-Z]{1,2}[0-9][0-9A-Z]?\s?[0-9][A-Z]{2}$/i;
@@ -32,28 +31,8 @@ const DriverDetails = () => {
         }));
     };
 
-    const handleStripePayment = async () => {
-        const stripe = await stripePromise;
-
-        const response = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/booking/create-checkout-session/`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                successUrl: `${window.location.origin}/payment-success`,
-                cancelUrl: `${window.location.origin}/payment-cancel`,
-            }),
-        });
-
-        const session = await response.json();
-        const result = await stripe.redirectToCheckout({ sessionId: session.id });
-
-        if (result.error) {
-            console.error(result.error.message);
-        }
-    };
-
     const validateForm = () => {
-        let newErrors = {};
+        const newErrors = {};
 
         if (!formData.firstName) newErrors.firstName = "First name is required.";
         if (!formData.lastName) newErrors.lastName = "Last name is required.";
@@ -82,29 +61,6 @@ const DriverDetails = () => {
 
         setModalOpen(true);
 
-        // setLoading(true);
-
-        // try {
-        //     // Call Stripe Checkout first
-        //     await handleStripePayment();
-
-        //     // After payment is completed, submit the form data to your backend
-        //     const response = await fetch("/api/submit-booking", {
-        //         method: "POST",
-        //         headers: { "Content-Type": "application/json" },
-        //         body: JSON.stringify(formData),
-        //     });
-
-        //     if (response.ok) {
-        //         alert("Booking completed successfully!");
-        //     } else {
-        //         alert("Failed to complete booking.");
-        //     }
-        // } catch (error) {
-        //     console.error(error);
-        // } finally {
-        //     setLoading(false);
-        // }
     };
 
     return (
