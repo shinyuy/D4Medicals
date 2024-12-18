@@ -14,7 +14,7 @@ export default function useSocialAuth(authenticate: any, provider: string) {
 	useEffect(() => {
 		const state = searchParams.get('state');
 		const code = searchParams.get('code');
-
+		
 		if (state && code && !effectRan.current) {
 			authenticate({ provider, state, code })
 				.unwrap()

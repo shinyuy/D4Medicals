@@ -9,7 +9,7 @@ export default async function continueWithSocialAuth(
 			process.env.NEXT_PUBLIC_HOST
 		}/api/o/${provider}/?redirect_uri=${
 			process.env.NODE_ENV === 'production'
-				? 'http://localhost:3000' //process.env.NEXT_PUBLIC_REDIRECT_URL
+				? process.env.NEXT_PUBLIC_REDIRECT_URL
 				: 'http://localhost:3000'
 		}/auth/${redirect}`;
 
@@ -33,3 +33,4 @@ export default async function continueWithSocialAuth(
 		toast.error('Something went wrong');
 	}
 }
+// https://d4-medicals.vercel.app
