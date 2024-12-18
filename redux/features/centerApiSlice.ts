@@ -8,6 +8,12 @@ const centerApiSlice = apiSlice.injectEndpoints({
           method: 'GET',
       }),
   }),
+    retrieveCenterLocations: builder.query({
+      query: () => ({
+          url: `/center/locations/get/`,
+          method: 'GET',
+      }),
+  }),
     retrieveCenters: builder.query({
       query: () => ({
           url: '/center/get/',
@@ -26,5 +32,5 @@ const centerApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useRetrieveCentersQuery, useCreateCenterSessionMutation, useRetrieveCentersByLocationQuery } = centerApiSlice;
+export const { useRetrieveCentersQuery, useCreateCenterSessionMutation, useRetrieveCentersByLocationQuery, useRetrieveCenterLocationsQuery } = centerApiSlice;
 

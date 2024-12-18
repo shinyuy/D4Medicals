@@ -33,4 +33,3 @@ export default async function continueWithSocialAuth(
 		toast.error('Something went wrong');
 	}
 }
-// https://d4-medicals.vercel.app

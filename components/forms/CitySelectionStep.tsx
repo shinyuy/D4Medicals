@@ -1,24 +1,25 @@
 import { useEffect, useState } from "react";
 import Clock from "../utils/Clock"
 import Calendar from "../utils/Calendar"
-import { useRetrieveCentersByLocationQuery } from '../../redux/features/centerApiSlice';
+import { useRetrieveCentersByLocationQuery, useRetrieveCenterLocationsQuery } from '../../redux/features/centerApiSlice';
 
 
-const cities = [
-    "Bath", "Birmingham", "Bradford", "Brighton & Hove", "Bristol", "Cambridge", "Canterbury", "Carlisle", "Chelmsford", "Chester", "Chichester", "Coventry", "Derby",
-    "Durham", "Ely", "Exeter", "Gloucester", "Hereford", "Kingston upon Hull", "Lancaster", "Leeds", "Leicester", "Lichfield",
-    "Lincoln", "Liverpool", "London", "Manchester", "Newcastle upon Tyne", "Norwich", "Nottingham", "Oxford", "Peterborough", "Plymouth", "Portsmouth", "Preston",
-    "Ripon", "Salford", "Salisbury", "Sheffield", "Southampton", "St Albans", "Stoke-on-Trent", "Sunderland", "Truro", "Wakefield", "Wells", "Westminster", "Winchester",
-    "Wolverhampton", "Worcester", "York", "Armagh", "Belfast", "Londonderry", "Lisburn", "Newry", "Aberdeen", "Dundee", "Edinburgh", "Glasgow", "Inverness", "Perth", "Stirling", "Bangor", "Cardiff",
-    "Newport", "St. Asaph", "St. David's", "Swansea"
-]
+// const cities = [
+//     "Bath", "Birmingham", "Bradford", "Brighton & Hove", "Bristol", "Cambridge", "Canterbury", "Carlisle", "Chelmsford", "Chester", "Chichester", "Coventry", "Derby",
+//     "Durham", "Ely", "Exeter", "Gloucester", "Hereford", "Kingston upon Hull", "Lancaster", "Leeds", "Leicester", "Lichfield",
+//     "Lincoln", "Liverpool", "London", "Manchester", "Newcastle upon Tyne", "Norwich", "Nottingham", "Oxford", "Peterborough", "Plymouth", "Portsmouth", "Preston",
+//     "Ripon", "Salford", "Salisbury", "Sheffield", "Southampton", "St Albans", "Stoke-on-Trent", "Sunderland", "Truro", "Wakefield", "Wells", "Westminster", "Winchester",
+//     "Wolverhampton", "Worcester", "York", "Armagh", "Belfast", "Londonderry", "Lisburn", "Newry", "Aberdeen", "Dundee", "Edinburgh", "Glasgow", "Inverness", "Perth", "Stirling", "Bangor", "Cardiff",
+//     "Newport", "St. Asaph", "St. David's", "Swansea"
+// ]
 
 const CitySelectionStep = ({ onNextStep, setFormData, formData }) => {
     const [selectedCity, setSelectedCity] = useState("");
     const [availableDoctors, setAvailableDoctors] = useState([]);
     const { data: centersData, /*isFetching*/ } = useRetrieveCentersByLocationQuery(selectedCity);
+    const { data: cities, /*isFetching*/ } = useRetrieveCenterLocationsQuery('');
 
-
+    console.log(cities)
     useEffect(() => {
         if (centersData?.centers) {
             setAvailableDoctors(centersData.centers);
@@ -53,7 +54,7 @@ const CitySelectionStep = ({ onNextStep, setFormData, formData }) => {
                     className="block w-full mt-1 p-2 bg-white border border-gray-300 rounded-md shadow-sm focus:ring-green-900 focus:border-green-900"
                 >
                     <option value="">Select a city</option>
-                    {cities.map((city) => (
+                    {cities?.locations?.map((city) => (
                         <option key={city} value={city}>
                             {city}
                         </option>

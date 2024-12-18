@@ -57,6 +57,7 @@ export default function Page() {
 
                 {create ?
                     <>
+                        <button className='text-white bg-green-900 px-4 py-2 mb-6 rounded-full' onClick={() => setCreate(!create)}>See Centers</button>
                         <div className="mb-6">
                             <label htmlFor="city" className="block text-sm font-medium text-gray-700">
                                 Where is this test center/doctor located ?
@@ -102,7 +103,7 @@ export default function Page() {
                     </>
                     :
                     <div>
-                        <button onClick={() => setCreate(!create)}>Create</button>
+                        <button className='text-white bg-green-900 px-4 py-2 mb-6 rounded-full' onClick={() => setCreate(!create)}>Add a Center</button>
                         {centersData?.centers?.map((center, i) => {
                             return (
                                 <div key={i} className="w-1/2 center-card border rounded-lg shadow-md p-4">
