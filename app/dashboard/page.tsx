@@ -26,7 +26,7 @@ export default function Page() {
 			</header>
 			<main className='mx-auto max-w-7xl py-6 my-8 sm:px-6 lg:px-8'>
 				{/* <List config={config} /> */}
-				<Link href={"/dashboard/calendar"}>Calendar</Link><br />
+				{/* <Link href={"/dashboard/calendar"}>Calendar</Link><br /> */}
 				<Link href={"/dashboard/centers"}>Add D4 Medical Test Center</Link>
 			</main>
 		</>
