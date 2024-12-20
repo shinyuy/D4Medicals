@@ -20,6 +20,7 @@ export default function Calendar({ location, centerId, formData, setFormData }) 
             setSelectedDate(undefined);
             setAvailableSlots([]);
         } else {
+
             if (date.getDay() == 0 || date.getDay() == 6 || date < new Date()) { // we do not take meeting on saturday nor sunday and neither for past dates
                 setSelectedDate(undefined);
                 setAvailableSlots([]);
@@ -29,11 +30,12 @@ export default function Calendar({ location, centerId, formData, setFormData }) 
                 try {
                     const dayDate = format(date, 'yyyyMMdd')
                     const dayDateStr = parse(dayDate, 'yyyyMMdd', new Date())
-                    const timeMin = dayDateStr.toISOString();
+                    const timeMin = add(dayDateStr, { hours: 8 }).toISOString()  //dayDateStr.toISOString();
 
-                    const timeMax = add(dayDateStr, { days: 1 }).toISOString();
+                    const timeMax = add(dayDateStr, { hours: 17 }).toISOString();
+                    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
 
-                    const response = await createEventsSession({ timeMin, timeMax, location, centerId }); // go fetch data on server
+                    const response = await createEventsSession({ timeMin, timeMax, location, centerId, timeZone }); // go fetch data on server
 
                     if ('data' in response && response.data) {
                         const events = response?.data || [];

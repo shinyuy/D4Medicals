@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import PaymentWrapper from "./PaymentModal";
 import { Elements } from "@stripe/react-stripe-js";
+import Link from "next/link";
 
 const stripePromise = loadStripe("pk_test_51QWeSwDgaWgRlwMxzXay5R7FHglYjMymwM2BwlykO6izceqB6tIvQPJ2GjXhLNsJLWSjpmZ3NbDrRhffNLZGAfe600r8XnM7B1");
 
@@ -17,8 +18,8 @@ interface FormErrors {
     termsAccepted?: string;
 }
 
-const DriverDetails = () => {
-    const [formData, setFormData] = useState({
+const DriverDetails = ({ formData, setEventDetails, onNextStep }) => {
+    const [driverFormData, setDriverFormData] = useState({
         firstName: "",
         lastName: "",
         dob: "",
@@ -38,43 +39,40 @@ const DriverDetails = () => {
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
-        setFormData((prev) => ({
+        setDriverFormData((prev) => ({
             ...prev,
             [name]: type === "checkbox" ? checked : value,
         }));
     };
 
     const validateForm = () => {
-        const newErrors: FormErrors = {
-            licenceType: ""
-        };
+        const newErrors: FormErrors = {};
 
-        if (!formData.firstName) newErrors.firstName = "First name is required.";
-        if (!formData.lastName) newErrors.lastName = "Last name is required.";
-        if (!formData.dob) newErrors.dob = "Date of birth is required.";
-        if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email))
+        if (!driverFormData.firstName) newErrors.firstName = "First name is required.";
+        if (!driverFormData.lastName) newErrors.lastName = "Last name is required.";
+        if (!driverFormData.dob) newErrors.dob = "Date of birth is required.";
+        if (!driverFormData.email || !/\S+@\S+\.\S+/.test(driverFormData.email))
             newErrors.email = "A valid email is required.";
-        if (!formData.phone || formData.phone.length < 10)
+        if (!driverFormData.phone || driverFormData.phone.length < 10)
             newErrors.phone = "A valid phone number is required.";
-        if (!formData.postCode || !postCodeRegex.test(formData.postCode))
+        if (!driverFormData.postCode || !postCodeRegex.test(driverFormData.postCode))
             newErrors.postCode = "A valid UK postcode is required.";
-        if (!formData.vehicleType)
+        if (!driverFormData.vehicleType)
             newErrors.vehicleType = "Vehicle type is required.";
-        if (!formData.licenceType)
+        if (!driverFormData.licenceType)
             newErrors.licenceType = "Licence type is required.";
-        if (!formData.termsAccepted)
+        if (!driverFormData.termsAccepted)
             newErrors.termsAccepted = "You must accept the terms and conditions.";
-
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
 
     const handleSubmit = async (e) => {
+
         e.preventDefault();
 
         if (!validateForm()) return;
         setLoading(true)
-
         setModalOpen(true);
 
     };
@@ -92,7 +90,7 @@ const DriverDetails = () => {
                         <input
                             type="text"
                             name="firstName"
-                            value={formData.firstName}
+                            value={driverFormData.firstName}
                             onChange={handleChange}
                             className={`mt-1 block w-full p-2 border rounded-md ${errors.firstName
                                 ? "border-red-500"
@@ -112,7 +110,7 @@ const DriverDetails = () => {
                         <input
                             type="text"
                             name="lastName"
-                            value={formData.lastName}
+                            value={driverFormData.lastName}
                             onChange={handleChange}
                             className={`mt-1 block w-full p-2 border rounded-md ${errors.lastName
                                 ? "border-red-500"
@@ -132,7 +130,7 @@ const DriverDetails = () => {
                         <input
                             type="date"
                             name="dob"
-                            value={formData.dob}
+                            value={driverFormData.dob}
                             onChange={handleChange}
                             className={`mt-1 block w-full p-2 border rounded-md ${errors.dob
                                 ? "border-red-500"
@@ -152,7 +150,7 @@ const DriverDetails = () => {
                         <input
                             type="email"
                             name="email"
-                            value={formData.email}
+                            value={driverFormData.email}
                             onChange={handleChange}
                             className={`mt-1 block w-full p-2 border rounded-md ${errors.email
                                 ? "border-red-500"
@@ -172,7 +170,7 @@ const DriverDetails = () => {
                         <input
                             type="tel"
                             name="phone"
-                            value={formData.phone}
+                            value={driverFormData.phone}
                             onChange={handleChange}
                             className={`mt-1 block w-full p-2 border rounded-md ${errors.phone
                                 ? "border-red-500"
@@ -192,7 +190,7 @@ const DriverDetails = () => {
                         <input
                             type="text"
                             name="postCode"
-                            value={formData.postCode}
+                            value={driverFormData.postCode}
                             onChange={handleChange}
                             className={`mt-1 block w-full p-2 border rounded-md ${errors.postCode
                                 ? "border-red-500"
@@ -211,7 +209,7 @@ const DriverDetails = () => {
                         </label>
                         <select
                             name="vehicleType"
-                            value={formData.vehicleType}
+                            value={driverFormData.vehicleType}
                             onChange={handleChange}
                             className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
                         >
@@ -234,7 +232,7 @@ const DriverDetails = () => {
                         </label>
                         <select
                             name="licenceType"
-                            value={formData.licenceType}
+                            value={driverFormData.licenceType}
                             onChange={handleChange}
                             className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
                         >
@@ -253,12 +251,12 @@ const DriverDetails = () => {
                             <input
                                 type="checkbox"
                                 name="termsAccepted"
-                                checked={formData.termsAccepted}
+                                checked={driverFormData.termsAccepted}
                                 onChange={handleChange}
                                 className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                             />
                             <span className="ml-2 text-sm text-gray-700">
-                                I accept the terms and conditions
+                                I accept the <Link href="/terms-of-service" className="text-blue-900 underline">terms and conditions</Link>
                             </span>
                         </label>
                         {errors.termsAccepted && (
@@ -281,7 +279,11 @@ const DriverDetails = () => {
                         <PaymentWrapper
                             isOpen={isModalOpen}
                             onClose={() => setModalOpen(false)}
+                            driverFormData={driverFormData}
                             formData={formData}
+                            setDriverFormData={setDriverFormData}
+                            setEventDetails={setEventDetails}
+                            onNextStep={onNextStep}
                         />
                     </Elements>)}
 

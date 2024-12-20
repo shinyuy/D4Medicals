@@ -4,6 +4,7 @@ import { useState } from "react";
 import CitySelectionStep from "./CitySelectionStep"
 import Calendar from "./Calendar"
 import DriverDetails from "./DriverDetails";
+import EventSuccess from "./BookingSuccess"
 
 const medicalTypes = [
     {
@@ -36,8 +37,15 @@ export default function BookingForm() {
         city: "",
         date: "",
         timeSlot: "",
+        timeSlotCenterId: "",
         centerId: "",
     });
+    const [eventDetails, setEventDetails] = useState({
+        title: "",
+        date: "",
+        time: "",
+        location: ""
+    })
 
     const handleNext = () => setStep(step + 1);
     const handleBack = () => setStep(step - 1);
@@ -49,18 +57,16 @@ export default function BookingForm() {
     };
 
 
-    console.log(formData)
-
     return (
         <div className="max-w-4xl py-12 mx-auto p-6 rounded-lg  md:min-h-[80vh]">
             {/* Step Indicator */}
             <div className="text-center mb-4">
                 <p className="text-sm text-gray-600">
-                    Step {step} of 6
+                    Step {step} of 5
                 </p>
                 <progress
                     value={step}
-                    max="6"
+                    max="5"
                     className="w-full h-2 rounded bg-gray-300"
                 />
             </div>
@@ -106,13 +112,21 @@ export default function BookingForm() {
                         <h2 className="text-xl font-semibold mb-4">
                             Step 4: Fill your details
                         </h2>
-                        <DriverDetails />
+                        <DriverDetails onNextStep={handleNext} formData={formData} setEventDetails={setEventDetails} />
+                    </div>
+                )}
+                {step === 5 && (
+                    <div>
+                        <h2 className="text-xl font-semibold mb-4">
+                            Step 5: Booking Confirmation
+                        </h2>
+                        <EventSuccess eventDetails={eventDetails} />
                     </div>
                 )}
 
                 {/* Navigation Buttons */}
                 <div className="mt-6 flex justify-between">
-                    {step > 1 && (
+                    {step > 1 && step != 5 && (
                         <button
                             type="button"
                             onClick={handleBack}
@@ -122,7 +136,7 @@ export default function BookingForm() {
                             Back
                         </button>
                     )}
-                    {step < 6 && step != 2 && (
+                    {step < 6 && step != 2 && step != 4 && step != 5 && (
                         <button
                             type="button"
                             onClick={handleNext}
@@ -135,7 +149,7 @@ export default function BookingForm() {
                             Next
                         </button>
                     )}
-                    {step === 6 && (
+                    {step === 5 && (
                         <button
                             type="submit"
                             className="bg-green-500 text-white px-4 py-2 rounded-md"

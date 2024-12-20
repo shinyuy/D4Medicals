@@ -19,7 +19,6 @@ const CitySelectionStep = ({ onNextStep, setFormData, formData }) => {
     const { data: centersData, /*isFetching*/ } = useRetrieveCentersByLocationQuery(selectedCity);
     const { data: cities, /*isFetching*/ } = useRetrieveCenterLocationsQuery('');
 
-    console.log(cities)
     useEffect(() => {
         if (centersData?.centers) {
             setAvailableDoctors(centersData.centers);

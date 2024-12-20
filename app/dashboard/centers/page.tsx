@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useCreateCenterSessionMutation, useRetrieveCentersQuery } from '../../../redux/features/centerApiSlice';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
@@ -24,8 +24,18 @@ export default function Page() {
         openFrom: "",
         closesAt: ""
     })
+    const [centers, setCenters] = useState([])
     const { data: centersData, /*isFetching*/ } = useRetrieveCentersQuery('');
     const [create, setCreate] = useState(false)
+
+
+    useEffect(() => {
+        if (centersData?.centers) {
+            setCenters(centersData.centers);
+        } else {
+            setCenters([create]); // Clear data if no centers available
+        }
+    }, [centersData]);
 
 
     async function createTestCenter() {
@@ -104,7 +114,7 @@ export default function Page() {
                     :
                     <div>
                         <button className='text-white bg-green-900 px-4 py-2 mb-6 rounded-full' onClick={() => setCreate(!create)}>Add a Center</button>
-                        {centersData?.centers?.map((center, i) => {
+                        {centers?.map((center, i) => {
                             return (
                                 <div key={i} className="w-1/2 center-card border rounded-lg shadow-md p-4">
                                     <h2 className="text-xl font-semibold">{center.center_name}</h2>

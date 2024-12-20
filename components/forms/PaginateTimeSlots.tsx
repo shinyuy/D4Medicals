@@ -34,21 +34,21 @@ const PaginateTimeSlots = ({ timeSlots, setFormData, formData }) => {
                     <li
                         key={i}
                         onClick={() =>
-                            setFormData({ ...formData, timeSlot: slot })
+                            setFormData({ ...formData, timeSlot: slot.slot, timeSlotCenterId: slot.center_id })
                         }
                     >
                         <button
-                            key={slot}
+                            key={i}
                             type="button"
                             onClick={() =>
-                                setFormData({ ...formData, timeSlot: slot })
+                                setFormData({ ...formData, timeSlot: slot, timeSlotCenterId: slot.center_id })
                             }
-                            className={`p-2 rounded-md text-center mb-2 ${formData.timeSlot === slot
+                            className={`p-2 rounded-md text-center mb-2 ${formData.timeSlot === slot.slot
                                 ? "bg-blue-500 text-white"
                                 : "bg-gray-200"
                                 } hover:bg-blue-100 hover:shadow-md transition`}
                         >
-                            {slot}
+                            {slot.slot}
                         </button>
                     </li>
                 ))}
