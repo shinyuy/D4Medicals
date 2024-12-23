@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Clock from "../utils/Clock"
 import Calendar from "../utils/Calendar"
 import { useRetrieveCentersByLocationQuery, useRetrieveCenterLocationsQuery } from '../../redux/features/centerApiSlice';
+import { useSearchParams } from "next/navigation";
 
 
 // const cities = [
@@ -14,7 +15,9 @@ import { useRetrieveCentersByLocationQuery, useRetrieveCenterLocationsQuery } fr
 // ]
 
 const CitySelectionStep = ({ onNextStep, setFormData, formData }) => {
-    const [selectedCity, setSelectedCity] = useState("");
+    const params = useSearchParams()
+    const city = params.get("location")
+    const [selectedCity, setSelectedCity] = useState(city);
     const [availableDoctors, setAvailableDoctors] = useState([]);
     const { data: centersData, /*isFetching*/ } = useRetrieveCentersByLocationQuery(selectedCity);
     const { data: cities, /*isFetching*/ } = useRetrieveCenterLocationsQuery('');
@@ -52,7 +55,8 @@ const CitySelectionStep = ({ onNextStep, setFormData, formData }) => {
                     onChange={(e) => handleCitySelection(e.target.value)}
                     className="block w-full mt-1 p-2 bg-white border border-gray-300 rounded-md shadow-sm focus:ring-green-900 focus:border-green-900"
                 >
-                    <option value="">Select a city</option>
+                    {city ? <option value={city}>{city}</option> :
+                        <option value="">Select a city</option>}
                     {cities?.locations?.map((city) => (
                         <option key={city} value={city}>
                             {city}
@@ -72,7 +76,7 @@ const CitySelectionStep = ({ onNextStep, setFormData, formData }) => {
                             {availableDoctors?.map((doctor, index) => (
                                 <div
                                     key={index}
-                                    className="p-2 bg-white border border-gray-300 rounded-lg shadow hover:shadow-md flex flex-col justify-between w-1/2 h-40"
+                                    className="p-2 bg-white border border-gray-300 rounded-lg shadow hover:shadow-md flex flex-col justify-between w-full md:w-1/2 h-40"
                                 >
                                     <div className="flex justify-between">
                                         <h4 className="font-semibold text-green-700">

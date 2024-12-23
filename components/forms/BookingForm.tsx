@@ -77,7 +77,7 @@ export default function BookingForm() {
                         <h2 className="text-xl font-semibold mb-4">
                             Step 1: Select Medical Type
                         </h2>
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-2 gap-4 ">
                             {medicalTypes.map((type) => (
                                 <button
                                     key={type.id}
@@ -85,7 +85,7 @@ export default function BookingForm() {
                                     onClick={() =>
                                         setFormData({ ...formData, medicalType: type.label })
                                     }
-                                    className={`p-4 rounded-lg shadow-md border ${formData.medicalType === type.label
+                                    className={`p-4 h-48 md:h-auto rounded-lg shadow-md border ${formData.medicalType === type.label
                                         ? "border-green-500 bg-green-50"
                                         : "border-gray-300 bg-white"
                                         } hover:shadow-lg transition`}

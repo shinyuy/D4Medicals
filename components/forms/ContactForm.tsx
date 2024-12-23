@@ -1,7 +1,7 @@
 "use client"
 import { useState } from "react";
 
-export default function ContactForm() {
+export default function ContactForm({ bg }) {
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
@@ -39,9 +39,9 @@ export default function ContactForm() {
     };
 
     return (
-        <div className="bg-green-900 py-10 px-6 mb-[200px]">
+        <div className={`${bg} py-10 w-full px-2 mb-[200px]`}>
             <form
-                className="max-w-xl mx-auto bg-white rounded-lg py-12 px-6"
+                className="max-w-xl mx-auto bg-white rounded-lg py-12 px-2 md:px-6"
                 onSubmit={handleSubmit}
             >
                 <h2 className="text-3xl font-bold  text-center mb-6">Contact Us</h2>

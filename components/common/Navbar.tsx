@@ -6,7 +6,8 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 import { useLogoutMutation } from '../../redux/features/authApiSlice';
 import { logout as setLogout } from '../../redux/features/authSlice';
-import { NavLink, NavButton } from '../common';
+import { NavLink, NavButton, NavDropdown } from '../common';
+
 
 export default function Navbar() {
 	const pathname = usePathname();
@@ -43,38 +44,32 @@ export default function Navbar() {
 
 	const guestLinks = (isMobile: boolean) => (
 		<>
-			<NavLink
-				isSelected={isSelected('/taxi-medical')}
+
+			<NavDropdown
+				isSelected={isSelected('/driver-medicals')}
 				isMobile={isMobile}
-				href='/taxi-medical'
-			>
-				Taxi Medical
-			</NavLink>
-			<NavLink
-				isSelected={isSelected('/hgv-medical')}
-				isMobile={isMobile}
-				href='/hgv-medical'
-			>
-				HGV Medical
-			</NavLink>
-			<NavLink
-				isSelected={isSelected('/same-day-medicals')}
-				isMobile={isMobile}
-				href='/same-day-medicals'
-			>
-				Same Day Medicals
-			</NavLink>
-			<NavLink
+				href='/locations'
+				title="Locations"
+				options={[
+					{ link: `/driver-medicals?location=Liverpool`, title: "Liverpool Driver Medical" },
+					{ link: `/driver-medicals?location=Manchester`, title: "Manchester Driver Medical" }
+				]} children={''}
+			/>
+			<NavDropdown
 				isSelected={isSelected('/driver-medicals')}
 				isMobile={isMobile}
 				href='/driver-medicals'
-			>
-				Driver Medicals
-			</NavLink>
+				title="Driver Medicals"
+				options={[
+					{ link: `/taxi-medical`, title: "Taxi Driver Medical" },
+					{ link: `/hgv-medical`, title: "HGV Driver Medical" },
+					{ link: `/same-day-medicals`, title: "Same Day Medicals" },
+				]} children={''}
+			/>
 			<NavLink
-				isSelected={isSelected('/contact')}
+				isSelected={isSelected('/contact-us')}
 				isMobile={isMobile}
-				href='/contact'
+				href='/contact-us'
 			>
 				Contact Us
 			</NavLink>

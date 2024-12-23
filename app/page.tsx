@@ -20,7 +20,7 @@ export default function Page() {
 				backgroundRepeat: 'no-repeat',
 				width: '100%',
 				height: '600px',
-			}} className=''>
+			}} className='text-center md:text-start'>
 				<Navbar />
 				<div className='h-full flex flex-col items-center justify-center'>
 					<Link href={"https://uk.trustpilot.com/review/d4medicalforms.co.uk"}>
@@ -36,7 +36,7 @@ export default function Page() {
 						HGV / Taxi medicals with D4 Medical Forms
 					</h1>
 					<p className='text-white font-bold'>
-						Click the link below to book your driver medical today:
+						Click the link below to book your driver medical today
 					</p>
 					<Link href='/driver-medicals' >
 						<button
@@ -206,7 +206,7 @@ export default function Page() {
 				</div>
 			</section>
 
-			<ContactForm />
+			<ContactForm bg={"bg-green-900"} />
 
 
 
