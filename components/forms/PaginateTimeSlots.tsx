@@ -62,7 +62,7 @@ const PaginateTimeSlots = ({ timeSlots, setFormData, formData }) => {
                     Previous
                 </button>
                 <span>
-                    Page {currentPage} of {totalPages}
+                    {currentPage} of {totalPages}
                 </span>
                 <button
                     onClick={handleNext}
